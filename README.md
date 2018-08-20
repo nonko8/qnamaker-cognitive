@@ -37,8 +37,8 @@ QnAMakerのナレッジベースを生成するプログラムを作成する。
 
 1. .Net Frameowrk のコンソールアプリケーションプロジェクトを作成
 2. プロジェクトを作成したら、NuGetから「Newtonsoft.JSON」をインストール
-3. `CreateQnA.cs` を作成し、以下のコードに置き換える
-<script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
+3. `CreateQnA.cs` を作成し、以下のコードに置き換える  
+[CreateQnA.cs](https://github.com/nonko8/qnamaker-cognitive/blob/master/src/QnAMaker/QnAMaker/CreateQnA.cs)
 4. `key` をAzureポータルからコピーした値に置き換える
 
 ### ナレッジベース生成時のレスポンス
@@ -88,9 +88,9 @@ Press any key to continue.
 ### ナレッジベースの更新
 QnAMakerのナレッジベースを更新するプログラムを作成する。上記で作成したプロジェクトに新規クラスを追加して実装する。
 
-1. `CreateQnA.cs` を作成し、以下のコードに置き換える
-<script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
-2. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。
+1. `UpdateQnA.cs` を作成し、以下のコードに置き換える  
+[UpdateQnA.cs](https://github.com/nonko8/qnamaker-cognitive/blob/master/src/QnAMaker/QnAMaker/UpdateQnA.cs)
+2. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。 
 ![2018-08-20_182730.png](images/2018-08-20_182730.png)
 
 ### ナレッジベース更新時のレスポンス
@@ -120,9 +120,9 @@ Press any key to continue.
 QnAMakerのナレッジベースを公開するプログラムを作成する。上記で作成したプロジェクトに新規クラスを追加して実装する。
 
 1. `PublishQnA.cs` を作成し、以下のコードに置き換える
-<script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
+[PublishQnA.cs](https://github.com/nonko8/qnamaker-cognitive/blob/master/src/QnAMaker/QnAMaker/PublishQnA.cs)
 2. `key` をAzureポータルからコピーした値に置き換える
-3. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。
+3. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。  
 ![2018-08-20_182730.png](images/2018-08-20_182730.png)
 
 ### ナレッジベース更新時のレスポンス
