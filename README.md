@@ -32,12 +32,12 @@ QnA Makerをリソースとして選択したAPIアカウントが必要にな�
 
 ![2018-08-20_152909.png](images/2018-08-20_152909.png)
 
-### ナレッジベース生成
-QnAMakerのナレッジベースを生成するアプリを作成する。
+### ナレッジベースの生成
+QnAMakerのナレッジベースを生成するプログラムを作成する。
 
 1. .Net Frameowrk のコンソールアプリケーションプロジェクトを作成
 2. プロジェクトを作成したら、NuGetから「Newtonsoft.JSON」をインストール
-3. `Programs.cs` を以下のコードに置き換える
+3. `CreateQnA.cs` を作成し、以下のコードに置き換える
 <script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
 4. `key` をAzureダッシュボードからコピーした値に置き換える
 
@@ -83,4 +83,35 @@ Calling https://westus.api.cognitive.microsoft.com/qnamaker/v4.0/operations/d9d4
 Press any key to continue.
 ```
 
-ナレッジベースが作成されると、[QnA Makerポータル](https://www.qnamaker.ai/Home/MyServices)の[ナレッジベース]ページで、。表示するナレッジベース名（QnA Maker FAQなど）を選択すると、ナレッジベースを表示できる。
+ナレッジベースが作成されると、[QnA Makerポータル](https://www.qnamaker.ai/Home/MyServices)の[ナレッジベース]ページで、該当するナレッジベース名（QnA Maker FAQなど）を選択すると、ナレッジベースを表示できる。
+
+### ナレッジベースの更新
+QnAMakerのナレッジベースを更新するプログラムを作成する。上記で作成したプロジェクトに新規クラスを追加して実装する。
+
+1. `CreateQnA.cs` を作成し、以下のコードに置き換える
+<script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
+2. `key` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。
+![2018-08-20_182730.png](images/2018-08-20_182730.png)
+
+### ナレッジベース更新時のレスポンス
+レスポンスはJSONで返される。最後の呼び出しが「`Succeeded`」を返した場合、ナレッジベースが正常に更新されたことを表す。トラブルシューティングを行うには、[QnA Maker APIの操作の詳細を取得する](https://westus.dev.cognitive.microsoft.com/docs/services/5a93fcf85b4ccd136866eb37/operations/operations_getoperationdetails)を参照する。
+
+```json
+{
+  "operationState": "NotStarted",
+  "createdTimestamp": "2018-04-13T01:49:48Z",
+  "lastActionTimestamp": "2018-04-13T01:49:48Z",
+  "userId": "2280ef5917bb4ebfa1aae41fb1cebb4a",
+  "operationId": "5156f64e-e31d-4638-ad7c-a2bdd7f41658"
+}
+...
+{
+  "operationState": "Succeeded",
+  "createdTimestamp": "2018-04-13T01:49:48Z",
+  "lastActionTimestamp": "2018-04-13T01:49:50Z",
+  "resourceLocation": "/knowledgebases/140a46f3-b248-4f1b-9349-614bfd6e5563",
+  "userId": "2280ef5917bb4ebfa1aae41fb1cebb4a",
+  "operationId": "5156f64e-e31d-4638-ad7c-a2bdd7f41658"
+}
+Press any key to continue.
+```
