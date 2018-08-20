@@ -23,11 +23,11 @@ Azure の Coginitive Services のひとつ。
 |Azure Search (for the data)|[More information](https://azure.microsoft.com/ja-jp/services/search/)|[Pricing](https://azure.microsoft.com/ja-jp/pricing/details/search/)|
 
 ### 作成
-ダッシュボードから「リソースの作成」で「QnA Maker」で検索して作成する。
+ポータルから「リソースの作成」で「QnA Maker」で検索して作成する。
 
 ## APIの作成（C#編）
 ### キーの取得
-QnA Makerをリソースとして選択したAPIアカウントが必要になるので、Azureダッシュボードダッシュボードの[リソース管理]で[キー]を選択し、どこかにコピー＆ペーストしておく。  
+QnA Makerをリソースとして選択したAPIアカウントが必要になるので、Azureポータルポータルの[リソース管理]で[キー]を選択し、どこかにコピー＆ペーストしておく。  
 キーは２つ表示されるが、どちらか一方だけ(KEY1だけ)でOK。
 
 ![2018-08-20_152909.png](images/2018-08-20_152909.png)
@@ -39,7 +39,7 @@ QnAMakerのナレッジベースを生成するプログラムを作成する。
 2. プロジェクトを作成したら、NuGetから「Newtonsoft.JSON」をインストール
 3. `CreateQnA.cs` を作成し、以下のコードに置き換える
 <script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
-4. `key` をAzureダッシュボードからコピーした値に置き換える
+4. `key` をAzureポータルからコピーした値に置き換える
 
 ### ナレッジベース生成時のレスポンス
 レスポンスはJSONで返される。最後の呼び出しが「`Succeeded`」を返した場合、ナレッジベースが正常に作成されたことを表す。トラブルシューティングを行うには、[QnA Maker APIの操作の詳細を取得する](https://westus.dev.cognitive.microsoft.com/docs/services/5a93fcf85b4ccd136866eb37/operations/operations_getoperationdetails)を参照する。
@@ -90,7 +90,7 @@ QnAMakerのナレッジベースを更新するプログラムを作成する。
 
 1. `CreateQnA.cs` を作成し、以下のコードに置き換える
 <script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
-2. `key` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。
+2. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。
 ![2018-08-20_182730.png](images/2018-08-20_182730.png)
 
 ### ナレッジベース更新時のレスポンス
@@ -115,3 +115,22 @@ QnAMakerのナレッジベースを更新するプログラムを作成する。
 }
 Press any key to continue.
 ```
+
+### ナレッジベースの公開
+QnAMakerのナレッジベースを公開するプログラムを作成する。上記で作成したプロジェクトに新規クラスを追加して実装する。
+
+1. `PublishQnA.cs` を作成し、以下のコードに置き換える
+<script src="https://gist.github.com/nonko8/aeadcafc852ca712325d27511fbb9b35.js"></script>
+2. `key` をAzureポータルからコピーした値に置き換える
+3. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。
+![2018-08-20_182730.png](images/2018-08-20_182730.png)
+
+### ナレッジベース更新時のレスポンス
+レスポンスはJSONで返される。「`Success`」を返した場合、ナレッジベースが正常に処理されたことを表す。
+
+```json
+{
+  "result": "Success."
+}
+```
+
