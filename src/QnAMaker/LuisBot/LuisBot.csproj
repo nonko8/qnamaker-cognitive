@@ -139,6 +139,8 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
