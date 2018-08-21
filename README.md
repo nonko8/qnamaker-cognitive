@@ -11,12 +11,14 @@ Azure の Coginitive Services のひとつ。
 - QnA Maker を他の API (Language Understanding サービス、Speech API など) とシームレスに統合することにより、さまざまな方法でユーザーからの質問を解釈して回答することができる
 
 価格
+
 |レベル|機能|料金|
 |--|--|--|
 |Free|3 managed documents; up to 1 MB each|¥0|
 |Standars|No limit on the number of managed documents|¥1,120/月|
 
 上記の価格設定とは別に、以下のリソースに対しても支払いが必要となる。QnA Maker リソースを作成すると、自分のAzureサブスクリプションでデータとランタイムをホストすることになるが、これらは Azure Search と App Service によって提供される。
+
 |リソース|機能|料金|
 |--|--|--|
 |Azure App Service (for the runtime)|[More information](https://azure.microsoft.com/ja-jp/services/app-service/)|[Pricing](https://azure.microsoft.com/ja-jp/pricing/details/app-service/)|
@@ -90,7 +92,7 @@ QnAMakerのナレッジベースを更新するプログラムを作成する。
 
 1. `UpdateQnA.cs` を作成し、以下のコードに置き換える  
 [UpdateQnA.cs](https://github.com/nonko8/qnamaker-cognitive/blob/master/src/QnAMaker/QnAMaker/UpdateQnA.cs)
-2. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。 
+2. `kbid` を有効なナレッジベースIDに置き換える。[QnA Makerのナレッジベース](https://www.qnamaker.ai/Home/MyServices)にアクセスして、次のようにURLの 'kbid ='以降の値をセットする。  
 ![2018-08-20_182730.png](images/2018-08-20_182730.png)
 
 ### ナレッジベース更新時のレスポンス
@@ -210,22 +212,16 @@ http://localhost:3979/api/messages
 ## Azure へデプロイするための環境設定
 Botアプリケーションは、Azure App Serviceで動作する。ローカルからAzure App Serviceにデプロイする方法は以下の方法がある。
 
-1. Visual Studio から Azure App Service へ直接発行  
-<br />
-手順は公式サイトを参照  
+1. Visual Studio から Azure App Service へ直接発行。手順は公式サイトを参照。  
 [ボットを Bot Service に発行する](https://docs.microsoft.com/ja-jp/azure/bot-service/bot-service-continuous-deployment?view=azure-bot-service-3.0)  
 
 2. Azure Web Appのデプロイオプションで発行  
-<br />
-Azure App Serviceを先に作成し、リポジトリと連携させる方法。ソースコード管理と連携しているので、リポジトリにPushするたびにデプロイされる。  <br /><br />
-設定については、公式サイトを参照。  
+Azure App Serviceを先に作成し、リポジトリと連携させる方法。ソースコード管理と連携しているので、リポジトリにPushするたびにデプロイされる。設定については、公式サイトを参照。  
 [Azure App Service へのローカル Git デプロイ](https://docs.microsoft.com/ja-jp/azure/app-service/app-service-deploy-local-git)  
 [Azure App Service への継続的デプロイ](https://docs.microsoft.com/ja-jp/azure/app-service/app-service-continuous-deployment#deploy-continuously-from-github)
 
 3. Visual Studio Team ServicesでCI/CDパイプライン  
-<br />
-VSTSのGit Ripositoryでソースコード管理をしている場合には、VSTSからビルド・デプロイ可能。  <br /><br />
-設定については、公式サイトを参照。  
+VSTSのGit Ripositoryでソースコード管理をしている場合には、VSTSからビルド・デプロイ可能。設定については、公式サイトを参照。  
 [Azure App Service への継続的デプロイ](https://docs.microsoft.com/ja-jp/azure/app-service/app-service-continuous-deployment#deploy-continuously-from-vsts)
 
 ## AzureにデプロイしたBotのテスト
