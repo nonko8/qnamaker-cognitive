@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QnAMaker", "QnAMaker\QnAMaker.csproj", "{1E635BEE-6A6F-4286-AE7D-D70B7AEABF41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuisBot", "LuisBot\LuisBot.csproj", "{5E45FD9F-AA94-4EC9-B644-43F7DE234FF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1E635BEE-6A6F-4286-AE7D-D70B7AEABF41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E635BEE-6A6F-4286-AE7D-D70B7AEABF41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E635BEE-6A6F-4286-AE7D-D70B7AEABF41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E45FD9F-AA94-4EC9-B644-43F7DE234FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E45FD9F-AA94-4EC9-B644-43F7DE234FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E45FD9F-AA94-4EC9-B644-43F7DE234FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E45FD9F-AA94-4EC9-B644-43F7DE234FF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

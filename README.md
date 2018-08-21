@@ -134,3 +134,102 @@ QnAMakerのナレッジベースを公開するプログラムを作成する。
 }
 ```
 
+---
+
+## Bot Frameworkの構築
+
+Bot FRamework を開発するための設定を行う。マイクロソフト公式サイトを参照。  
+> [Create a bot with the Bot Builder SDK for .NET](https://docs.microsoft.com/en-us/bot-framework/dotnet/bot-builder-dotnet-quickstart)
+
+### 環境
+
+- Visual Studio 2017（C#）
+
+### 環境設定
+
+Bot Frameworkを開発するために、Visual Studioのプロジェクトテンプレートを以下からダウンロード。
+- Bot Application.  
+  http://aka.ms/bf-bc-vstemplate
+- Bot Controller.  
+  http://aka.ms/bf-bc-vscontrollertemplate
+- Bot Dialog.  
+  http://aka.ms/bf-bc-vsdialogtemplate
+
+それぞれダウンロードしたら、zip形式のままテンプレートの所定の格納先に配置。
+デフォルトでは、`%USERPROFILE%\Documents\Visual Studio 2017\Templates\ProjectTemplates\Visual C#\` となっている。作成
+
+### ボットの作成
+前述のテンプレートを正しく配置されていれば、新しくプロジェクトを作成するときに、「Bot Application」が選択できるようになっている。
+
+![2018-08-21_125259.png](images/2018-08-21_125259.png)
+
+NuGetでパッケージの最新化をする。NuGet管理画面で「Microsoft.Bot.Builder」を検索し Bot Builder をアップデート。2018/8/21時点では、Version 3.15.3 が最新の安定版となっている。
+
+![2018-08-21_130114.png](images/2018-08-21_130114.png)
+
+### 実行とデバッグ
+ボットプロジェクトをローカルで実行するには、エミュレータが必要。公式のエミュレータとし“botframework-emulator”が提供されているので、それをインストール。2018/8/21時点では、Version3.5.36 が最新の安定版をなっている。
+
+- [Microsoft/BotFramework-Emulator v3.5.36](https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v3.5.36)
+
+プレビュー段階のエミュレータは、GitHubのこちらから確認可能。
+- [Microsoft/BotFramework-Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases)
+
+
+---
+
+NOTE：以降は下書き
+
+## QnA Maker と LUIS
+参考サイト：  
+[QnA Maker と LUIS の統合によるナレッジ ベースの配信](https://docs.microsoft.com/ja-jp/azure/cognitive-services/QnAMaker/tutorials/integrate-qnamaker-luis)
+
+<blockquote>
+QnA Maker ナレッジ ベースは、大きくなるにつれて、単一のモノリシックなセットとして維持することが難しくなり、より小さな論理的なチャンクにナレッジ ベースを分割する必要があります。
+QnA Maker には複数のナレッジ ベースを簡単に作成できますが、入力された質問を適切なナレッジ ベースにルーティングするためには、何らかのロジックが必要となります。 これは LUIS を使用して実行できます。
+
+**アーキテクチャ**
+
+![QnA Maker と LUIS のアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/cognitive-services/QnAMaker/media/qnamaker-tutorials-qna-luis/qnamaker-luis-architecture.png)
+</blockquote>
+
+## 事前にやること
+- [QnA Maker](https://qnamaker.ai/) でナレッジ ベースを作成しておく
+  - [ナレッジベースの作り方](README.md)
+- [LUIS ポータル](https://www.luis.ai/) からアプリを作成しておく
+  - [LUISアプリの作り方](https://docs.microsoft.com/ja-jp/azure/cognitive-services/LUIS/luis-how-to-start-new-app)  
+    「Create new app」をクリック
+    ![2018-08-21_105057.png](images/2018-08-21_105057.png)  
+    いろいろ入力して「Done」をクリック
+    ![2018-08-21_105201.png](images/2018-08-21_105201.png)
+    作成されるとこのような画面が表示される
+    ![2018-08-21_105322.png](images/2018-08-21_105322.png)
+- ナレッジベースとLUISアプリを発行する
+
+## Bot Service での Language Understanding ボットの作成（LUISポータルからアプリの作成）
+
+1. Azure ポータル で、「新しいリソースの作成」を選択
+
+2. 検索ボックスで、「**Web アプリ ボット**」と検索し、「**Web App Bot**」を選択  
+![2018-08-21_110440.png](images/2018-08-21_110440.png)
+
+3. Bot Service の設定ブレードが表示されるので、必要な情報を指定し、[作成] をクリック。 これによって、ボット サービスと LUIS アプリが作成され、Azure にデプロイされる  
+    |項目名|説明|
+    |--|--|
+    |アプリ名|ボットの名前を設定|
+    |ボット テンプレート|**Language Understanding (C#)** テンプレートを選択|
+    |LUIS アプリの場所|アプリが作成されるオーサリング リージョンを選択|
+
+4. ボットがデプロイされたら、「Web チャットでのテスト」をクリックして、Web チャット ウィンドウを開く
+
+5. Web チャットに「hello」と入力してみる
+![2018-08-21_115306.png](images/2018-08-21_115306.png)
+
+6. 上図のように「You said hello」と返ってくればOK！
+
+## QnA Maker + LUIS ボットの作成
+
+
+## ボットへの LUIS アプリの接続
+
+「アプリケーションの設定」を開き、以下のアプリケーション設定を編集する
