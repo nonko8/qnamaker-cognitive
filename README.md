@@ -175,10 +175,65 @@ NuGetでパッケージの最新化をする。NuGet管理画面で「Microsoft.
 プレビュー段階のエミュレータは、GitHubのこちらから確認可能。
 - [Microsoft/BotFramework-Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases)
 
+※2018/8/21時点、32bit版のエミュレータは提供されていない。そもそも提供される予定はなかったらしいが、32bit版のリクエストが多数あったようで、対応を検討しているとのこと。from GitHub Issue
+
+エミュレータの準備ができたら、Visual Studio で F5 (デバックの開始) で通常通りにデバック実行。ブラウザが起動して、Bot Application の画面が表示されたら、ローカルでボットが実行されていることになる。
+
+![2018-08-21_165413.png](images/2018-08-21_165413.png)
+
+ブラウザのURLを確認する。
+```
+http://localhost:3979/
+```
+
+ブラウザで上記のURLの場合、エミュレーターのエンドポイントURLは以下となる。
+```
+http://localhost:3979/api/messages
+```
+
+![2018-08-21_235450.png](images/2018-08-21_235450.png)
+
+エンドポイントURLを入力したら、`Microsoft App ID` 、 `Micorsoft App Password` 、 `Locale` はブランクのままで「CONNECT」ボタンをクリック。
+
+「hello」入力して「You sent hello which was 5 characters」と返ってくればOK。
+
+エミュレーターには、以下のような情報が表示されている。
+- 右枠：
+  - Botアプリケーション内で実行されているメッセージやユーザーの情報、返答内容　(JSON形式で表示)
+- 左枠
+  - Botととのやりとり
+
+![2018-08-22_000212.png](images/2018-08-22_000212.png)
+
+リンクやメッセージをクリックすると、該当のJSONパラメータが右枠に表示される。上図は「You sent hello which was 5 characters」のレスポンスのJSON。
+
+## Azure へデプロイするための環境設定
+Botアプリケーションは、Azure App Serviceで動作する。ローカルからAzure App Serviceにデプロイする方法は以下の方法がある。
+
+1. Visual Studio から Azure App Service へ直接発行  
+<br />
+手順は公式サイトを参照  
+[ボットを Bot Service に発行する](https://docs.microsoft.com/ja-jp/azure/bot-service/bot-service-continuous-deployment?view=azure-bot-service-3.0)  
+
+2. Azure Web Appのデプロイオプションで発行  
+<br />
+Azure App Serviceを先に作成し、リポジトリと連携させる方法。ソースコード管理と連携しているので、リポジトリにPushするたびにデプロイされる。  <br /><br />
+設定については、公式サイトを参照。  
+[Azure App Service へのローカル Git デプロイ](https://docs.microsoft.com/ja-jp/azure/app-service/app-service-deploy-local-git)  
+[Azure App Service への継続的デプロイ](https://docs.microsoft.com/ja-jp/azure/app-service/app-service-continuous-deployment#deploy-continuously-from-github)
+
+3. Visual Studio Team ServicesでCI/CDパイプライン  
+<br />
+VSTSのGit Ripositoryでソースコード管理をしている場合には、VSTSからビルド・デプロイ可能。  <br /><br />
+設定については、公式サイトを参照。  
+[Azure App Service への継続的デプロイ](https://docs.microsoft.com/ja-jp/azure/app-service/app-service-continuous-deployment#deploy-continuously-from-vsts)
+
+## AzureにデプロイしたBotのテスト
+ローカルで実行した方法と同様に、Azure App Service にデプロイしたBotアプリケーションもエミュレーターを起動してテストをできる。
+
+Azure App ServiceのURLに"/api/messages"を付与したものエンドポイントURLにすればつながるはず。
 
 ---
-
-NOTE：以降は下書き
 
 ## QnA Maker と LUIS
 参考サイト：  
@@ -226,6 +281,11 @@ QnA Maker には複数のナレッジ ベースを簡単に作成できますが
 ![2018-08-21_115306.png](images/2018-08-21_115306.png)
 
 6. 上図のように「You said hello」と返ってくればOK！
+
+
+NOTE：以降は下書き
+
+7. `trained` と `published` で LUIS app ID と key を生成。
 
 ## QnA Maker + LUIS ボットの作成
 
