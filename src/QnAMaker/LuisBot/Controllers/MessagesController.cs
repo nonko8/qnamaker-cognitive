@@ -18,7 +18,9 @@ namespace LuisBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                //await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                activity.Text = await MessageTranslatorService.Current.Translate(activity.Text);
+                await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
             }
             else
             {

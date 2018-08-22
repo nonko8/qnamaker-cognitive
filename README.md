@@ -251,11 +251,35 @@ QnA Maker には複数のナレッジ ベースを簡単に作成できますが
   - [LUISアプリの作り方](https://docs.microsoft.com/ja-jp/azure/cognitive-services/LUIS/luis-how-to-start-new-app)  
     「Create new app」をクリック
     ![2018-08-21_105057.png](images/2018-08-21_105057.png)  
-    いろいろ入力して「Done」をクリック
-    ![2018-08-21_105201.png](images/2018-08-21_105201.png)
-    作成されるとこのような画面が表示される
-    ![2018-08-21_105322.png](images/2018-08-21_105322.png)
-- ナレッジベースとLUISアプリを発行する
+    いろいろ入力して「Done」をクリック  
+    ![2018-08-21_105201.png](images/2018-08-21_105201.png)  
+    作成されるとこのような画面が表示される  
+    ![2018-08-21_105322.png](images/2018-08-21_105322.png)  
+- ナレッジベースとLUISアプリを発行する  
+  - Intentsの作成  
+    Intentsは文章の意味や意図の部分を指す。  
+    作成したアプリケーションを選択して、左のメニューから「Intents」をクリックし、「Add prebuilt domain intent」をクリック  
+    ![2018-08-22_120705.png](images/2018-08-22_120705.png)  
+    事前構築済みのものが色々でてくるので、今回は下の方にある"Weather"を使用してみる。「Weather.GetConditon」と「Weather.Forecast」をチェックし、「Done」をクリック  
+    ![2018-08-22_122838.png](images/2018-08-22_122838.png)  
+    ![2018-08-22_122919.png](images/2018-08-22_122919.png)  
+  - Entitiesの作成  
+    Entitiesは文章の意味や意図のキーワードのようなもの。  
+    次に左のメニューから「Entities」をクリックし、「Add prebuilt domain entity」をクリック  
+    ![2018-08-22_123017.png](images/2018-08-22_123017.png)  
+    こちらも事前構築済みの"Weather"を使用してみる。「Weather.Location」をチェックし、「Done」をクリック  
+    ![2018-08-22_123046.png](images/2018-08-22_123046.png)  
+    ![2018-08-22_123205.png](images/2018-08-22_123205.png)  
+
+    文章を解析して、意図としてConditionに関連しているのか、Forcastに関連しているのか判別してくれて、文章の中に、Locationに関するキーワードが含まれていて、それがなんなのかを解析してくれるという感じ。
+
+  - テストをしてみる  
+    画面右上の「Tran」ボタンをクリックするとトレーニングが開始され、「←Test」ボタンがActive化される。「←Test」ボタンをクリックするとテキストボックスが表示されるので、試しに「what is the weather in tokyo?」と入力してみると、解析されているかどうかを確認することができる。  
+    ![2018-08-22_130426.png](images/2018-08-22_130426.png)
+
+  - 発行する  
+  「PUBLISH」画面で「Publish」ボタンをクリック。  
+  ![2018-08-22_130732.png](images/2018-08-22_130732.png)
 
 ## Bot Service での Language Understanding ボットの作成（LUISポータルからアプリの作成）
 
@@ -265,6 +289,7 @@ QnA Maker には複数のナレッジ ベースを簡単に作成できますが
 ![2018-08-21_110440.png](images/2018-08-21_110440.png)
 
 3. Bot Service の設定ブレードが表示されるので、必要な情報を指定し、[作成] をクリック。 これによって、ボット サービスと LUIS アプリが作成され、Azure にデプロイされる  
+
     |項目名|説明|
     |--|--|
     |アプリ名|ボットの名前を設定|
@@ -281,11 +306,19 @@ QnA Maker には複数のナレッジ ベースを簡単に作成できますが
 
 NOTE：以降は下書き
 
-7. `trained` と `published` で LUIS app ID と key を生成。
+## ボットへの LUIS アプリの接続
+
+Azureポータルから LUIS用のWebアプリボットを選択し、「アプリケーション設定」を開いて、以下のアプリケーション設定を編集する
+
+![2018-08-22_140018.png](images/2018-08-22_140018.png)
+
+|項目名|設定内容|
+|--|--|
+|LuisAppId|作成したLUIS アプリのアプリケーション ID ![2018-08-22_135558.png](images/2018-08-22_135558.png)|
+|LuisAPIHostName|LUIS アプリを米国西部以外のリージョンで作成した場合に設定  ![2018-08-22_135324.png](images/2018-08-22_135324.png)|
+|LuisAPIKey|オーサリング キー|
 
 ## QnA Maker + LUIS ボットの作成
 
-
-## ボットへの LUIS アプリの接続
-
-「アプリケーションの設定」を開き、以下のアプリケーション設定を編集する
+- [GitHub Microsoft/BotBuilder](https://github.com/Microsoft/BotBuilder/blob/master/CSharp/Library/Microsoft.Bot.Builder/Dialogs/LuisDialog.cs)
+- [Basic features of FormFlow](https://docs.microsoft.com/en-us/azure/bot-service/dotnet/bot-builder-dotnet-formflow?view=azure-bot-service-3.0)
