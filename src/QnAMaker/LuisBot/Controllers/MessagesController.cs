@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using BotApp.Services;
 
 namespace LuisBot
 {
@@ -18,8 +19,8 @@ namespace LuisBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                //await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
-                activity.Text = await MessageTranslatorService.Current.Translate(activity.Text);
+                // NOTE:日本語→英語に変換する場合は、以下をコメントアウトし、TranslatorAPIKeyをconfigに設定する
+                //activity.Text = await MessageTranslatorService.Current.Translate(activity.Text);
                 await Conversation.SendAsync(activity, () => new Dialogs.RootLuisDialog());
             }
             else

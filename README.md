@@ -320,5 +320,48 @@ Azureポータルから LUIS用のWebアプリボットを選択し、「アプ�
 
 ## QnA Maker + LUIS ボットの作成
 
+[LUISボット](src/QnAMaker/LuisBot)
+
+- ローカルで実行する場合は、Web.configの以下の値を、Azureポータルのアプリケーション設定からコピー＆ペーストして設定する。App Service にデプロイすると、Azureポータルのアプリケーション設定の値が使用される。
+
+```xml
+  <appSettings>
+    <!-- update these with your BotId, Microsoft App Id and your Microsoft App Password-->
+    <add key="BotId" value=""/>
+    <add key="MicrosoftAppId" value=""/>
+    <add key="MicrosoftAppPassword" value=""/>
+    <!-- Luis settings-->
+    <add key="LuisAppId" value=""/>
+    <add key="LuisAPIKey" value=""/>
+    <!-- OpenWeatherMapAPI-->
+    <add key="OpenWeatherAPIKey" value=""/>
+    <!-- Translator Text API-->
+    <add key="TranslatorAPIKey" value=""/>
+  </appSettings>
+```
+
+- Dialogsフォルダの RootLuisDialog.cs から処理が始まる。
+
+参考サイト：
 - [GitHub Microsoft/BotBuilder](https://github.com/Microsoft/BotBuilder/blob/master/CSharp/Library/Microsoft.Bot.Builder/Dialogs/LuisDialog.cs)
 - [Basic features of FormFlow](https://docs.microsoft.com/en-us/azure/bot-service/dotnet/bot-builder-dotnet-formflow?view=azure-bot-service-3.0)
+- [Microsoft Bot FrameworkとLUISで真面目にお天気Botを作ってみる](http://ninna2.hatenablog.com/entry/2017/08/07/175014)
+
+### OpenWeatherMapAPIの登録
+天気情報を取得するAPIはいくつかあるが、今回は無料で使用することができるOpenWeatherMapAPIを使用する。
+OpenWeatherMapAPIの公式サイトのにアクセスし、ユーザ登録をしてAPIKeyを取得する。
+
+- [Сurrent weather and forecast - OpenWeatherMap](https://openweathermap.org/)
+
+### OpenWeatherMapAPIとの連携
+
+参考サイト：
+- [GitHub - DiegoBao/OpenWeatherMapApi: C# Api Client for OpenWeatherMAP](https://github.com/DiegoBao/OpenWeatherMapApi)
+
+TODO:以降は下書き
+## Azure App Service へのデプロイ
+作成した「**Web App Bot**」にデプロイ！デプロイ方法は上述参照。
+
+## テスト
+
+
